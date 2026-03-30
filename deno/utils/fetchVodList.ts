@@ -41,7 +41,7 @@ export async function fetchVods(
     }[];
 }> {
     try {
-        const req = await fetch('https://gql.twitch.tv/gql', {
+        const req = await fetch('https://gql.kick.com/gql', {
             method: 'POST',
             body: JSON.stringify({
                 operationName: 'FilterableVideoTower_Videos',
@@ -61,8 +61,8 @@ export async function fetchVods(
             }),
             headers: {
                 'User-Agent': userAgent,
-                Referer: 'https://www.twitch.tv/',
-                Origin: 'https://www.twitch.tv/',
+                Referer: 'https://www.kick.com/',
+                Origin: 'https://www.kick.com/',
                 'Client-ID': clientId,
             },
         });

@@ -45,8 +45,8 @@ export default async function fetchMedia(
                     .join('&'),
                 headers: { [key: string]: string } = {
                     'User-Agent': userAgent,
-                    Referer: 'https://player.twitch.tv',
-                    Origin: 'https://player.twitch.tv',
+                    Referer: 'https://player.kick.com',
+                    Origin: 'https://player.kick.com',
                     'Client-ID': clientId,
                 };
             if (proxy == true)
@@ -98,8 +98,8 @@ export default async function fetchMedia(
                 },
                 headers: { [key: string]: string } = {
                     'User-Agent': userAgent,
-                    Referer: 'https://player.twitch.tv',
-                    Origin: 'https://player.twitch.tv',
+                    Referer: 'https://player.kick.com',
+                    Origin: 'https://player.kick.com',
                     'Client-ID': clientId,
                 };
 

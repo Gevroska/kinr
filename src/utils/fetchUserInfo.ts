@@ -32,14 +32,14 @@ export default async function fetchUserInfo(username: string): Promise<
     const deviceId = genDeviceID(),
         headers = {
             'User-Agent': userAgent,
-            Referer: 'https://www.twitch.tv/',
-            Origin: 'https://www.twitch.tv/',
+            Referer: 'https://www.kick.com/',
+            Origin: 'https://www.kick.com/',
             'Client-ID': clientId,
             'Device-ID': deviceId,
             'X-Device-ID': deviceId,
         },
         aboutPanelReq = await axios.post(
-            'https://gql.twitch.tv/gql',
+            'https://gql.kick.com/gql',
             {
                 operationName: 'ChannelRoot_AboutPanel',
                 variables: {
@@ -75,7 +75,7 @@ export default async function fetchUserInfo(username: string): Promise<
 
     const aboutPanelData: AboutPanelUserInfo = aboutPanelReq.data,
         streamMetadataReq = await axios.post(
-            'https://gql.twitch.tv/gql',
+            'https://gql.kick.com/gql',
             {
                 operationName: 'StreamMetadata',
                 variables: {
@@ -109,7 +109,7 @@ export default async function fetchUserInfo(username: string): Promise<
 
     const streamMetadataData: StreamMetadataInfo = streamMetadataReq.data,
         channelShellReq = await axios.post(
-            'https://gql.twitch.tv/gql',
+            'https://gql.kick.com/gql',
             {
                 operationName: 'ChannelShell',
                 variables: {

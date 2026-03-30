@@ -15,7 +15,7 @@ export async function fetchCategoryInfo(username: string): Promise<{
 }> {
     try {
         const req = await axios.post(
-            'https://gql.twitch.tv/gql',
+            'https://gql.kick.com/gql',
             {
                 operationName: 'SignupPromptCategory',
                 variables: {
@@ -35,8 +35,8 @@ export async function fetchCategoryInfo(username: string): Promise<{
             {
                 headers: {
                     'User-Agent': userAgent,
-                    Referer: 'https://www.twitch.tv/',
-                    Origin: 'https://www.twitch.tv/',
+                    Referer: 'https://www.kick.com/',
+                    Origin: 'https://www.kick.com/',
                     'Client-ID': clientId,
                 },
                 validateStatus: () => true,
@@ -68,7 +68,7 @@ export async function fetchViewCount(userId: string | number): Promise<{
 }> {
     try {
         const req = await axios.post(
-            'https://gql.twitch.tv/gql',
+            'https://gql.kick.com/gql',
             {
                 query: `query UseViewCount { user(id: ${userId}) { stream { viewersCount } } }`,
                 variables: {},
@@ -76,8 +76,8 @@ export async function fetchViewCount(userId: string | number): Promise<{
             {
                 headers: {
                     'User-Agent': userAgent,
-                    Referer: 'https://www.twitch.tv/',
-                    Origin: 'https://www.twitch.tv/',
+                    Referer: 'https://www.kick.com/',
+                    Origin: 'https://www.kick.com/',
                     'Client-ID': clientId,
                 },
                 validateStatus: () => true,
@@ -104,7 +104,7 @@ export async function fetchAvatar(
 ): Promise<{ valid: boolean; data?: string }> {
     try {
         const req = await axios.post(
-            'https://gql.twitch.tv/gql',
+            'https://gql.kick.com/gql',
             {
                 operationName: 'ChannelShell',
                 variables: {
@@ -121,8 +121,8 @@ export async function fetchAvatar(
             {
                 headers: {
                     'User-Agent': userAgent,
-                    Referer: 'https://www.twitch.tv/',
-                    Origin: 'https://www.twitch.tv/',
+                    Referer: 'https://www.kick.com/',
+                    Origin: 'https://www.kick.com/',
                     'Client-ID': clientId,
                 },
                 validateStatus: () => true,
@@ -150,7 +150,7 @@ export async function fetchTitle(username: string): Promise<{
 }> {
     try {
         const req = await axios.post(
-            'https://gql.twitch.tv/gql',
+            'https://gql.kick.com/gql',
             {
                 operationName: 'ComscoreStreamingQuery',
                 variables: {
@@ -172,8 +172,8 @@ export async function fetchTitle(username: string): Promise<{
             {
                 headers: {
                     'User-Agent': userAgent,
-                    Referer: 'https://www.twitch.tv/',
-                    Origin: 'https://www.twitch.tv/',
+                    Referer: 'https://www.kick.com/',
+                    Origin: 'https://www.kick.com/',
                     'Client-ID': clientId,
                 },
                 validateStatus: () => true,

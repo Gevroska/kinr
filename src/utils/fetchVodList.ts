@@ -44,7 +44,7 @@ export async function fetchVods(
 }> {
     try {
         const req = await axios.post(
-            'https://gql.twitch.tv/gql',
+            'https://gql.kick.com/gql',
             {
                 operationName: 'FilterableVideoTower_Videos',
                 variables: {
@@ -64,8 +64,8 @@ export async function fetchVods(
             {
                 headers: {
                     'User-Agent': userAgent,
-                    Referer: 'https://www.twitch.tv/',
-                    Origin: 'https://www.twitch.tv/',
+                    Referer: 'https://www.kick.com/',
+                    Origin: 'https://www.kick.com/',
                     'Client-ID': clientId,
                 },
                 validateStatus: () => true,

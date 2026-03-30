@@ -1,6 +1,6 @@
-# Twinr
+# Kinr
 
-Twinr is a privacy-focused alternative front-end to Twitch inspired by [Invidious](https://github.com/iv-org/invidious) and [Nitter](https://github.com/zedeus/nitter).  
+Kinr is a privacy-focused alternative front-end to Kick inspired by [Invidious](https://github.com/iv-org/invidious) and [Nitter](https://github.com/zedeus/nitter).  
 This project is a fork of Twineo by CloudyyUw:
 https://codeberg.org/CloudyyUw/twineo
 
@@ -8,7 +8,7 @@ https://codeberg.org/CloudyyUw/twineo
 
 - **Backend:** Rust (Axum + Tokio + Reqwest)
 - **Frontend:** SolidJS + Vite + TailwindCSS + daisyUI
-- **Media path:** The Rust server requests Twitch GQL/media and proxies playlists/media to clients.
+- **Media path:** The Rust server requests Kick GQL/media and proxies playlists/media to clients.
 
 ## Local development
 
@@ -23,12 +23,12 @@ Server runs on `http://localhost:3000`.
 ## Docker
 
 ```bash
-docker pull ghcr.io/gevroska/twinr:latest
+docker pull ghcr.io/gevroska/kinr:latest
 docker run --rm -p 3000:3000 \
   -e CLIENTID=kimne78kx3ncx6brgo4mv6wki5h1ko \
   -e USERAGENT="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0" \
   -e OPUS_AUDIO_BITRATES=32,64,96 \
-  ghcr.io/gevroska/twinr:latest
+  ghcr.io/gevroska/kinr:latest
 ```
 
 ## Environment variables
@@ -43,8 +43,8 @@ docker run --rm -p 3000:3000 \
 
 ```yaml
 services:
-  twinr:
-    image: ghcr.io/gevroska/twinr:latest
+  kinr:
+    image: ghcr.io/gevroska/kinr:latest
     ports:
       - "3000:3000"
     environment:

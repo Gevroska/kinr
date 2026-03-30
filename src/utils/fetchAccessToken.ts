@@ -24,7 +24,7 @@ export async function fetchAcessTokenWithOptions(options: {
 }> {
     const deviceId = genDeviceID(),
         req = await axios.post(
-            'https://gql.twitch.tv/gql',
+            'https://gql.kick.com/gql',
             {
                 query: graphQlQuery(options.platform),
                 variables: {
@@ -38,8 +38,8 @@ export async function fetchAcessTokenWithOptions(options: {
             {
                 headers: {
                     'User-Agent': userAgent,
-                    Referer: 'https://www.twitch.tv/',
-                    Origin: 'https://www.twitch.tv/',
+                    Referer: 'https://www.kick.com/',
+                    Origin: 'https://www.kick.com/',
                     'Client-ID': clientId,
                     'Device-ID': deviceId,
                     'X-Device-ID': deviceId,
@@ -82,7 +82,7 @@ export default async function fetchAcessToken(
 }> {
     return axios
         .post(
-            'https://gql.twitch.tv/gql',
+            'https://gql.kick.com/gql',
             {
                 query: graphQlQuery('web'),
                 variables: {
@@ -96,8 +96,8 @@ export default async function fetchAcessToken(
             {
                 headers: {
                     'User-Agent': userAgent,
-                    Referer: 'https://www.twitch.tv/',
-                    Origin: 'https://www.twitch.tv/',
+                    Referer: 'https://www.kick.com/',
+                    Origin: 'https://www.kick.com/',
                     'Client-ID': clientId,
                 },
                 validateStatus: () => true,

@@ -1,18 +1,18 @@
 import { randomUUID } from 'crypto';
-import { TwitchChatProxy } from './twitchChatClient';
+import { KickChatProxy } from './kickChatClient';
 import ws from 'ws';
 
 interface ExtWebSocket extends ws {
     id?: string;
 }
 
-export class TwitchChatServer {
+export class KickChatServer {
     private clients: { [k: string]: ExtWebSocket[] };
-    private chatProxy: TwitchChatProxy;
+    private chatProxy: KickChatProxy;
 
     constructor() {
         this.clients = {};
-        this.chatProxy = new TwitchChatProxy();
+        this.chatProxy = new KickChatProxy();
         this.chatProxy.on('message', this.messageHandler);
     }
 

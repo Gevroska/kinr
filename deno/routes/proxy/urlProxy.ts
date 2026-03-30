@@ -17,8 +17,8 @@ export default {
                     method: 'GET',
                     headers: {
                         'User-Agent': userAgent,
-                        Referer: 'https://player.twitch.tv',
-                        Origin: 'https://player.twitch.tv',
+                        Referer: 'https://player.kick.com',
+                        Origin: 'https://player.kick.com',
                         'Client-ID': clientId,
                     },
                 });

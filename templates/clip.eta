@@ -7,15 +7,15 @@
         <meta property="og:type" content="website" />
 
         <% if (it.invalid == true) { %>
-        <title>Twinr - Clip</title>
-        <meta name="title" content="Twinr - Clip" />
-        <meta property="og:title" content="Twinr - Clip" />
+        <title>Kinr - Clip</title>
+        <meta name="title" content="Kinr - Clip" />
+        <meta property="og:title" content="Kinr - Clip" />
         <% } else { %>
-        <title>Twinr - Clip <%= it.metadata.title %></title>
-        <meta name="title" content="Twinr - Clip <%= it.metadata.title %>" />
+        <title>Kinr - Clip <%= it.metadata.title %></title>
+        <meta name="title" content="Kinr - Clip <%= it.metadata.title %>" />
         <meta
             property="og:title"
-            content="Twinr - Clip <%= it.metadata.title %>"
+            content="Kinr - Clip <%= it.metadata.title %>"
         />
         <% if(it.base_url !== undefined) { %>
         <meta name="twitter:card" content="player" />
@@ -108,10 +108,10 @@
         >
             <div>
                 <p>
-                    Twinr Version <%= it.appversion %> -
+                    Kinr Version <%= it.appversion %> -
                     <a
                         class="text-blue-400"
-                        href="https://github.com/Gevroska/twinr"
+                        href="https://github.com/Gevroska/kinr"
                         >Source</a
                     >
                 </p>

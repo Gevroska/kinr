@@ -27,7 +27,7 @@ export default async function fetchChannelEmoteList(username: string): Promise<
     }
 
     const listReq = await axios.post(
-            `https://gql.twitch.tv/gql`,
+            `https://gql.kick.com/gql`,
             {
                 operationName:
                     'EmotePicker_EmotePicker_UserSubscriptionProducts',
@@ -45,8 +45,8 @@ export default async function fetchChannelEmoteList(username: string): Promise<
             {
                 headers: {
                     'User-Agent': userAgent,
-                    Referer: 'https://m.twitch.tv/',
-                    Origin: 'https://m.twitch.tv/',
+                    Referer: 'https://m.kick.com/',
+                    Origin: 'https://m.kick.com/',
                     'Client-ID': clientId,
                 },
                 validateStatus: () => true,

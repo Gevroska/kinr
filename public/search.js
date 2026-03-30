@@ -1,14 +1,14 @@
-const clipRegex = /(.+)?twitch\.tv\/\w+\/clip\/[\w-]+/,
-    streamRegex = /(.+)?twitch\.tv\/(.+)/,
-    vodRegex = /(.+)?twitch\.tv\/videos\/(\d+)/,
-    twitchDomainRegex = /(.+)?twitch\.tv/;
+const clipRegex = /(.+)?kick\.tv\/\w+\/clip\/[\w-]+/,
+    streamRegex = /(.+)?kick\.tv\/(.+)/,
+    vodRegex = /(.+)?kick\.tv\/videos\/(\d+)/,
+    kickDomainRegex = /(.+)?kick\.tv/;
 
 function resolvePathFromInput(input) {
     const trimmed = input.trim();
 
     if (trimmed.length < 1) return null;
 
-    // normalize full urls (instance urls and twitch urls)
+    // normalize full urls (instance urls and kick urls)
     if (/^https?:\/\//i.test(trimmed) || trimmed.includes('.')) {
         try {
             const formatted = /^https?:\/\//i.test(trimmed)
@@ -37,7 +37,7 @@ function resolvePathFromInput(input) {
         trimmed.match(streamRegex) ||
         trimmed.match(vodRegex)
     ) {
-        return trimmed.replace(twitchDomainRegex, '');
+        return trimmed.replace(kickDomainRegex, '');
     }
 
     if (!Number.isNaN(Number(trimmed))) {

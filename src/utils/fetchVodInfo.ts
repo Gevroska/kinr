@@ -10,7 +10,7 @@ export async function fetchName(
 ): Promise<{ valid: boolean; data?: string }> {
     try {
         const req = await axios.post(
-            'https://gql.twitch.tv/gql',
+            'https://gql.kick.com/gql',
             {
                 operationName: 'VodChannelLoginQuery',
                 variables: {
@@ -27,8 +27,8 @@ export async function fetchName(
             {
                 headers: {
                     'User-Agent': userAgent,
-                    Referer: 'https://www.twitch.tv/',
-                    Origin: 'https://www.twitch.tv/',
+                    Referer: 'https://www.kick.com/',
+                    Origin: 'https://www.kick.com/',
                     'Client-ID': clientId,
                 },
                 validateStatus: () => true,
@@ -56,7 +56,7 @@ export async function fetchVodMetadata(vodId: string): Promise<{
 }> {
     try {
         const req = await axios.post(
-            'https://gql.twitch.tv/gql',
+            'https://gql.kick.com/gql',
             {
                 operationName: 'ComscoreStreamingQuery',
                 variables: {
@@ -78,8 +78,8 @@ export async function fetchVodMetadata(vodId: string): Promise<{
             {
                 headers: {
                     'User-Agent': userAgent,
-                    Referer: 'https://www.twitch.tv/',
-                    Origin: 'https://www.twitch.tv/',
+                    Referer: 'https://www.kick.com/',
+                    Origin: 'https://www.kick.com/',
                     'Client-ID': clientId,
                 },
                 validateStatus: () => true,
@@ -115,7 +115,7 @@ export async function fetchCommentByOffset(
 }> {
     try {
         const req = await axios.post(
-            'https://gql.twitch.tv/gql',
+            'https://gql.kick.com/gql',
             {
                 operationName: 'VideoCommentsByOffsetOrCursor',
                 variables: {
@@ -133,8 +133,8 @@ export async function fetchCommentByOffset(
             {
                 headers: {
                     'User-Agent': userAgent,
-                    Referer: 'https://www.twitch.tv/',
-                    Origin: 'https://www.twitch.tv/',
+                    Referer: 'https://www.kick.com/',
+                    Origin: 'https://www.kick.com/',
                     'Client-ID': clientId,
                 },
                 validateStatus: () => true,

@@ -47,7 +47,7 @@ export async function fetchStreamerInfo(username: string): Promise<{
 }> {
     try {
         const ChannelShellReq = await axios.post(
-                'https://gql.twitch.tv/gql',
+                'https://gql.kick.com/gql',
                 {
                     operationName: 'ChannelShell',
                     variables: {
@@ -64,15 +64,15 @@ export async function fetchStreamerInfo(username: string): Promise<{
                 {
                     headers: {
                         'User-Agent': userAgent,
-                        Referer: 'https://www.twitch.tv/',
-                        Origin: 'https://www.twitch.tv/',
+                        Referer: 'https://www.kick.com/',
+                        Origin: 'https://www.kick.com/',
                         'Client-ID': clientId,
                     },
                     validateStatus: () => true,
                 }
             ),
             HomeOfflineReq = await axios.post(
-                'https://gql.twitch.tv/gql',
+                'https://gql.kick.com/gql',
                 {
                     operationName: 'HomeOfflineCarousel',
                     variables: {
@@ -91,8 +91,8 @@ export async function fetchStreamerInfo(username: string): Promise<{
                 {
                     headers: {
                         'User-Agent': userAgent,
-                        Referer: 'https://www.twitch.tv/',
-                        Origin: 'https://www.twitch.tv/',
+                        Referer: 'https://www.kick.com/',
+                        Origin: 'https://www.kick.com/',
                         'Client-ID': clientId,
                     },
                     validateStatus: () => true,

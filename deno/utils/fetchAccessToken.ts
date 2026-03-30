@@ -16,7 +16,7 @@ export default async function fetchAcessToken(
     type?: 'vod' | 'stream';
 }> {
     try {
-        const req = await fetch('https://gql.twitch.tv/gql', {
+        const req = await fetch('https://gql.kick.com/gql', {
             method: 'POST',
             body: JSON.stringify({
                 query: graphQlQuery,
@@ -30,8 +30,8 @@ export default async function fetchAcessToken(
             }),
             headers: {
                 'User-Agent': userAgent,
-                Referer: 'https://www.twitch.tv/',
-                Origin: 'https://www.twitch.tv/',
+                Referer: 'https://www.kick.com/',
+                Origin: 'https://www.kick.com/',
                 'Client-ID': clientId,
             },
         });

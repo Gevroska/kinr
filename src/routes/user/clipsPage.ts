@@ -4,7 +4,7 @@ import { join } from 'path';
 
 export default {
     append(app: Router, baseUrl: string) {
-        app.get('/:username/clip/:id', async (req, res) => {
+        const handler = async (req: Request, res: Response) => {
             const { quality, embed } = req.query;
 
             if (Boolean(embed) == true) {
@@ -36,6 +36,8 @@ export default {
                     base_url: baseUrl,
                 });
             } else res.sendFile(join(process.cwd(), 'public', 'index.html'));
-        });
+        };
+        app.get('/:username/clips/:id', handler);
+        app.get('/:username/clip/:id', handler);
     },
 };

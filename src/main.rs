@@ -184,7 +184,7 @@ async fn gql(state: &AppState, body: Value, mobile: bool) -> Result<Value, ()> {
         HeaderValue::from_static(if mobile {
             "https://m.kick.com/"
         } else {
-            "https://www.kick.com/"
+            "https://kick.com/"
         }),
     );
     headers.insert(
@@ -192,7 +192,7 @@ async fn gql(state: &AppState, body: Value, mobile: bool) -> Result<Value, ()> {
         HeaderValue::from_static(if mobile {
             "https://m.kick.com/"
         } else {
-            "https://www.kick.com/"
+            "https://kick.com/"
         }),
     );
 
@@ -939,8 +939,8 @@ async fn proxy(State(state): State<Arc<AppState>>, Query(q): Query<UrlQ>) -> imp
     pipe_url(
         &state,
         &decoded,
-        "https://www.kick.com",
-        "https://www.kick.com",
+        "https://kick.com",
+        "https://kick.com",
     )
     .await
 }

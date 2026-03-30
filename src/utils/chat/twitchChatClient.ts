@@ -1,9 +1,9 @@
 import EventEmitter from 'events';
 import { WebSocket } from 'ws';
 
-export class TwitchChatProxy extends EventEmitter {
+export class KickChatProxy extends EventEmitter {
     private ws: WebSocket;
-    private readonly url = 'wss://irc-ws.chat.twitch.tv:443';
+    private readonly url = 'wss://irc-ws.chat.kick.com:443';
     private streamers: string[] = [];
     private connected: boolean;
 
@@ -19,11 +19,11 @@ export class TwitchChatProxy extends EventEmitter {
     private connect() {
         this.ws = new WebSocket(this.url);
 
-        // tell twitch to give us everything
+        // tell kick to give us everything
         this.ws.onopen = () => {
-            this.ws.send('CAP REQ :twitch.tv/membership');
-            this.ws.send('CAP REQ :twitch.tv/tags');
-            this.ws.send('CAP REQ :twitch.tv/commands');
+            this.ws.send('CAP REQ :kick.com/membership');
+            this.ws.send('CAP REQ :kick.com/tags');
+            this.ws.send('CAP REQ :kick.com/commands');
 
             // guest credentials
             this.ws.send('PASS none');

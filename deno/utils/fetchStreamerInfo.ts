@@ -44,7 +44,7 @@ export async function fetchStreamerInfo(username: string): Promise<{
     };
 }> {
     try {
-        const ChannelShellReq = await fetch('https://gql.twitch.tv/gql', {
+        const ChannelShellReq = await fetch('https://gql.kick.com/gql', {
                 method: 'POST',
                 body: JSON.stringify({
                     operationName: 'ChannelShell',
@@ -61,12 +61,12 @@ export async function fetchStreamerInfo(username: string): Promise<{
                 }),
                 headers: {
                     'User-Agent': userAgent,
-                    Referer: 'https://www.twitch.tv/',
-                    Origin: 'https://www.twitch.tv/',
+                    Referer: 'https://www.kick.com/',
+                    Origin: 'https://www.kick.com/',
                     'Client-ID': clientId,
                 },
             }),
-            HomeOfflineReq = await fetch('https://gql.twitch.tv/gql', {
+            HomeOfflineReq = await fetch('https://gql.kick.com/gql', {
                 method: 'POST',
                 body: JSON.stringify({
                     operationName: 'HomeOfflineCarousel',
@@ -85,8 +85,8 @@ export async function fetchStreamerInfo(username: string): Promise<{
                 }),
                 headers: {
                     'User-Agent': userAgent,
-                    Referer: 'https://www.twitch.tv/',
-                    Origin: 'https://www.twitch.tv/',
+                    Referer: 'https://www.kick.com/',
+                    Origin: 'https://www.kick.com/',
                     'Client-ID': clientId,
                 },
             });

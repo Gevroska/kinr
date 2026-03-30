@@ -33,10 +33,10 @@ WORKDIR /app
 
 RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates ffmpeg && rm -rf /var/lib/apt/lists/*
 
-COPY --from=builder /app/target/release/twinr /usr/local/bin/twinr
+COPY --from=builder /app/target/release/kinr /usr/local/bin/kinr
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/templates ./templates
 COPY --from=builder /app/package.json ./package.json
 
 EXPOSE 3000
-CMD ["/usr/local/bin/twinr"]
+CMD ["/usr/local/bin/kinr"]

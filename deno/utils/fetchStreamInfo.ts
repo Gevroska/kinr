@@ -12,7 +12,7 @@ export async function fetchCategoryInfo(username: string): Promise<{
     };
 }> {
     try {
-        const req = await fetch('https://gql.twitch.tv/gql', {
+        const req = await fetch('https://gql.kick.com/gql', {
             method: 'POST',
             body: JSON.stringify({
                 operationName: 'SignupPromptCategory',
@@ -32,8 +32,8 @@ export async function fetchCategoryInfo(username: string): Promise<{
             }),
             headers: {
                 'User-Agent': userAgent,
-                Referer: 'https://www.twitch.tv/',
-                Origin: 'https://www.twitch.tv/',
+                Referer: 'https://www.kick.com/',
+                Origin: 'https://www.kick.com/',
                 'Client-ID': clientId,
             },
         });
@@ -62,7 +62,7 @@ export async function fetchViewCount(userId: string | number): Promise<{
     data?: number;
 }> {
     try {
-        const req = await fetch('https://gql.twitch.tv/gql', {
+        const req = await fetch('https://gql.kick.com/gql', {
             method: 'POST',
             body: JSON.stringify({
                 query: `query UseViewCount { user(id: ${userId}) { stream { viewersCount } } }`,
@@ -70,8 +70,8 @@ export async function fetchViewCount(userId: string | number): Promise<{
             }),
             headers: {
                 'User-Agent': userAgent,
-                Referer: 'https://www.twitch.tv/',
-                Origin: 'https://www.twitch.tv/',
+                Referer: 'https://www.kick.com/',
+                Origin: 'https://www.kick.com/',
                 'Client-ID': clientId,
             },
         });
@@ -96,7 +96,7 @@ export async function fetchAvatar(
     username: string
 ): Promise<{ valid: boolean; data?: string }> {
     try {
-        const req = await fetch('https://gql.twitch.tv/gql', {
+        const req = await fetch('https://gql.kick.com/gql', {
             method: 'POST',
             body: JSON.stringify({
                 operationName: 'ChannelShell',
@@ -113,8 +113,8 @@ export async function fetchAvatar(
             }),
             headers: {
                 'User-Agent': userAgent,
-                Referer: 'https://www.twitch.tv/',
-                Origin: 'https://www.twitch.tv/',
+                Referer: 'https://www.kick.com/',
+                Origin: 'https://www.kick.com/',
                 'Client-ID': clientId,
             },
         });
@@ -138,7 +138,7 @@ export async function fetchTitle(username: string): Promise<{
     data?: string;
 }> {
     try {
-        const req = await fetch('https://gql.twitch.tv/gql', {
+        const req = await fetch('https://gql.kick.com/gql', {
             method: 'POST',
             body: JSON.stringify({
                 operationName: 'ComscoreStreamingQuery',
@@ -160,8 +160,8 @@ export async function fetchTitle(username: string): Promise<{
             }),
             headers: {
                 'User-Agent': userAgent,
-                Referer: 'https://www.twitch.tv/',
-                Origin: 'https://www.twitch.tv/',
+                Referer: 'https://www.kick.com/',
+                Origin: 'https://www.kick.com/',
                 'Client-ID': clientId,
             },
         });

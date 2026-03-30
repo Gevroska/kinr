@@ -13,7 +13,7 @@ export async function fetchClipMedia(
     slug: string
 ): Promise<{ valid: boolean; data?: QualityURLS[] }> {
     try {
-        const req = await fetch('https://gql.twitch.tv/gql', {
+        const req = await fetch('https://gql.kick.com/gql', {
             method: 'POST',
             body: JSON.stringify({
                 operationName: 'VideoAccessToken_Clip',
@@ -30,8 +30,8 @@ export async function fetchClipMedia(
             }),
             headers: {
                 'User-Agent': userAgent,
-                Referer: 'https://www.twitch.tv/',
-                Origin: 'https://www.twitch.tv/',
+                Referer: 'https://www.kick.com/',
+                Origin: 'https://www.kick.com/',
                 'Client-ID': clientId,
             },
         });
@@ -89,7 +89,7 @@ export async function fetchClipMetadata(
     };
 }> {
     try {
-        const req = await fetch('https://gql.twitch.tv/gql', {
+        const req = await fetch('https://gql.kick.com/gql', {
             method: 'POST',
             body: JSON.stringify({
                 operationName: 'ClipMetadata',
@@ -107,8 +107,8 @@ export async function fetchClipMetadata(
             }),
             headers: {
                 'User-Agent': userAgent,
-                Referer: 'https://www.twitch.tv/',
-                Origin: 'https://www.twitch.tv/',
+                Referer: 'https://www.kick.com/',
+                Origin: 'https://www.kick.com/',
                 'Client-ID': clientId,
             },
         });

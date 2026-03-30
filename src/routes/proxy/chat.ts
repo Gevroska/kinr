@@ -1,6 +1,6 @@
-import { TwitchChatServer } from '../../utils/chat/twitchChatServer';
+import { KickChatServer } from '../../utils/chat/kickChatServer';
 import ws from 'ws';
 
-const twitchChatServer = new TwitchChatServer();
+const kickChatServer = new KickChatServer();
 export const wsServer = new ws.Server({ noServer: true });
-twitchChatServer.startWebSocketServer(wsServer);
+kickChatServer.startWebSocketServer(wsServer);

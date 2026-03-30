@@ -72,9 +72,9 @@ if (Hls.isSupported()) {
 }
 
 console.log('Connecting to chat');
-const ws = new WebSocket('wss://irc-ws.chat.twitch.tv/');
+const ws = new WebSocket('wss://irc-ws.chat.kick.com/');
 ws.onopen = () => {
-    ws.send('CAP REQ :twitch.tv/tags twitch.tv/commands twitch.tv/membership');
+    ws.send('CAP REQ :kick.com/tags kick.com/commands kick.com/membership');
     ws.send('PASS SCHMOOPIIE');
     ws.send('NICK justinfan35233');
     ws.send('USER justinfan35233 8 * :justinfan35233');

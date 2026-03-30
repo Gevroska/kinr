@@ -1,12 +1,12 @@
-## Using twitch chat
+## Using kick chat
 
-Chat web socket is located at `wss://irc-ws.chat.twitch.tv/`
+Chat web socket is located at `wss://irc-ws.chat.kick.com/`
 
 ### How to join
 
 After connecting, you'll need to send some raw (plain text) messages first
 
-1. `CAP REQ :twitch.tv/tags twitch.tv/commands twitch.tv/membership`
+1. `CAP REQ :kick.com/tags kick.com/commands kick.com/membership`
 2. `PASS SCHMOOPIIE`
 3. `NICK justinfan35233`
 4. `USER justinfan35233 8 * :justinfan35233`
@@ -18,7 +18,7 @@ After connecting, you'll need to send some raw (plain text) messages first
 This is an example of a chat message:
 
 ```
-@badge-info=<eg. subscriber/<int>>;badges=<eg. subscriber/<int>>;client-nonce=<string>;color=<hex_color>;display-name=<display_name>;emotes=;first-msg=0;flags=;id=<msg_id>;mod=<0/1 boolean>;returning-chatter=0;room-id=<streamer_id>;subscriber=<0/1 boolean>;tmi-sent-ts=<time_ms>;turbo=0;user-id=<id>;user-type= :<display_name_lowecase>!<display_name_lowecase>@<display_name_lowecase>.tmi.twitch.tv PRIVMSG #<streamer_name> :<text_message>
+@badge-info=<eg. subscriber/<int>>;badges=<eg. subscriber/<int>>;client-nonce=<string>;color=<hex_color>;display-name=<display_name>;emotes=;first-msg=0;flags=;id=<msg_id>;mod=<0/1 boolean>;returning-chatter=0;room-id=<streamer_id>;subscriber=<0/1 boolean>;tmi-sent-ts=<time_ms>;turbo=0;user-id=<id>;user-type= :<display_name_lowecase>!<display_name_lowecase>@<display_name_lowecase>.tmi.kick.com PRIVMSG #<streamer_name> :<text_message>
 ```
 
 #### Regex

@@ -3,9 +3,9 @@ import Nav from "./components/nav";
 import { useNavigate } from "@solidjs/router";
 import axios from "axios";
 
-const clipRegex = /(.+)?twitch\.tv\/\w+\/clip\/[\w-]+/,
-  streamRegex = /(.+)?twitch\.tv\/(.+)/,
-  vodRegex = /(.+)?twitch\.tv\/videos\/(\d+)/;
+const clipRegex = /(.+)?kick\.tv\/\w+\/clip\/[\w-]+/,
+  streamRegex = /(.+)?kick\.tv\/(.+)/,
+  vodRegex = /(.+)?kick\.tv\/videos\/(\d+)/;
 
 const Home: Component = () => {
   const [inputVal, setInputVal] = createSignal(""),
@@ -135,14 +135,14 @@ const Home: Component = () => {
   return (
     <>
       <Nav isHome={false} />
-      <title>Twinr - Home</title>
+      <title>Kinr - Home</title>
       <div class="hero min-h-[80vh] px-4">
         <div class="hero-content w-full max-w-xl text-center">
           <div class="card w-full border border-base-200 bg-base-100/90 shadow-xl backdrop-blur">
             <div class="card-body gap-4">
-              <h1 class="text-3xl font-bold">Twinr</h1>
+              <h1 class="text-3xl font-bold">Kinr</h1>
               <p class="text-sm text-base-content/70">
-                Lightweight Twitch viewer focused on privacy.
+                Lightweight Kick viewer focused on privacy.
               </p>
               <div class="form-control w-full">
                 <label class="label">

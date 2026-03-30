@@ -5,10 +5,10 @@ const Footer: Component = () => {
         <footer class="footer footer-center p-4 bg-base-300 text-base-content">
             <div>
                 <p>
-                    Twinr -{' '}
+                    Kinr -{' '}
                     <a
                         class="text-blue-400"
-                        href="https://github.com/Gevroska/twinr"
+                        href="https://github.com/Gevroska/kinr"
                     >
                         Source
                     </a>

@@ -66,7 +66,7 @@ async function fetchAccessTokenMobile(username: string): Promise<{
 }> {
     const deviceId = genDeviceID(),
         req = await axios.post(
-            'https://gql.twitch.tv/gql',
+            'https://gql.kick.com/gql',
             {
                 query: 'query StreamPlayer_Query(\n  $login: String!\n  $playerType: String!\n  $platform: String!\n  $skipPlayToken: Boolean!\n) {\n  ...StreamPlayer_token\n}\n\nfragment StreamPlayer_token on Query {\n  user(login: $login) {\n    login\n    stream @skip(if: $skipPlayToken) {\n      playbackAccessToken(params: {platform: $platform, playerType: $playerType}) {\n        signature\n        value\n        expiresAt\n        authorization {\n          isForbidden\n          forbiddenReasonCode\n        }\n      }\n      id\n      __typename\n    }\n    id\n    __typename\n  }\n}\n',
                 variables: {
@@ -79,8 +79,8 @@ async function fetchAccessTokenMobile(username: string): Promise<{
             {
                 headers: {
                     'User-Agent': userAgent,
-                    Referer: 'https://m.twitch.tv/',
-                    Origin: 'https://m.twitch.tv/',
+                    Referer: 'https://m.kick.com/',
+                    Origin: 'https://m.kick.com/',
                     'Client-Id': clientId,
                     'Device-Id': deviceId,
                 },
@@ -136,8 +136,8 @@ export default async function fetchStreamMedia(
                 .join('&'),
         headers = {
             'User-Agent': userAgent,
-            Referer: 'https://m.twitch.tv',
-            Origin: 'https://m.twitch.tv',
+            Referer: 'https://m.kick.com',
+            Origin: 'https://m.kick.com',
             Accept: 'application/x-mpegURL, application/vnd.apple.mpegurl, application/json, text/plain',
         },
         m3u8Req = await axios.get(

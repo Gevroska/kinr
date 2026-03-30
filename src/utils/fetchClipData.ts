@@ -16,7 +16,7 @@ export async function fetchClipMedia(
 ): Promise<{ valid: boolean; data?: QualityURLS[] }> {
     try {
         const req = await axios.post(
-            'https://gql.twitch.tv/gql',
+            'https://gql.kick.com/gql',
             {
                 operationName: 'VideoAccessToken_Clip',
                 variables: {
@@ -33,8 +33,8 @@ export async function fetchClipMedia(
             {
                 headers: {
                     'User-Agent': userAgent,
-                    Referer: 'https://www.twitch.tv/',
-                    Origin: 'https://www.twitch.tv/',
+                    Referer: 'https://www.kick.com/',
+                    Origin: 'https://www.kick.com/',
                     'Client-ID': clientId,
                 },
                 validateStatus: () => true,
@@ -96,7 +96,7 @@ export async function fetchClipMetadata(
 }> {
     try {
         const req = await axios.post(
-            'https://gql.twitch.tv/gql',
+            'https://gql.kick.com/gql',
             {
                 operationName: 'ClipMetadata',
                 variables: {
@@ -114,8 +114,8 @@ export async function fetchClipMetadata(
             {
                 headers: {
                     'User-Agent': userAgent,
-                    Referer: 'https://www.twitch.tv/',
-                    Origin: 'https://www.twitch.tv/',
+                    Referer: 'https://www.kick.com/',
+                    Origin: 'https://www.kick.com/',
                     'Client-ID': clientId,
                 },
                 validateStatus: () => true,

@@ -23,8 +23,8 @@ export default {
                         responseType: 'stream',
                         headers: {
                             'User-Agent': userAgent,
-                            Referer: 'https://www.twitch.tv',
-                            Origin: 'https://www.twitch.tv',
+                            Referer: 'https://www.kick.com',
+                            Origin: 'https://www.kick.com',
                             'Client-ID': clientId,
                         },
                         validateStatus: () => true,

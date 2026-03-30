@@ -105,16 +105,16 @@ async fn chat_socket(stream: axum::extract::ws::WebSocket) {
         return;
     }
     let channel = parts[1].to_lowercase();
-    let tws = tokio_tungstenite::connect_async("wss://irc-ws.chat.twitch.tv:443").await;
-    let Ok((twitch_ws, _)) = tws else {
+    let tws = tokio_tungstenite::connect_async("wss://irc-ws.chat.kick.com:443").await;
+    let Ok((kick_ws, _)) = tws else {
         return;
     };
-    let (mut tw_send, mut tw_recv) = twitch_ws.split();
+    let (mut tw_send, mut tw_recv) = kick_ws.split();
 
     for cap in [
-        "CAP REQ :twitch.tv/membership",
-        "CAP REQ :twitch.tv/tags",
-        "CAP REQ :twitch.tv/commands",
+        "CAP REQ :kick.com/membership",
+        "CAP REQ :kick.com/tags",
+        "CAP REQ :kick.com/commands",
         "PASS none",
         "NICK justinfan333333333333",
     ] {
@@ -182,23 +182,23 @@ async fn gql(state: &AppState, body: Value, mobile: bool) -> Result<Value, ()> {
     headers.insert(
         header::REFERER,
         HeaderValue::from_static(if mobile {
-            "https://m.twitch.tv/"
+            "https://m.kick.com/"
         } else {
-            "https://www.twitch.tv/"
+            "https://www.kick.com/"
         }),
     );
     headers.insert(
         header::ORIGIN,
         HeaderValue::from_static(if mobile {
-            "https://m.twitch.tv/"
+            "https://m.kick.com/"
         } else {
-            "https://www.twitch.tv/"
+            "https://www.kick.com/"
         }),
     );
 
     let req = state
         .client
-        .post("https://gql.twitch.tv/gql")
+        .post("https://gql.kick.com/gql")
         .headers(headers)
         .json(&body)
         .send()
@@ -609,11 +609,11 @@ async fn stream_proxy(
 ) -> impl IntoResponse {
     let quality = parse_quality_preference(query.quality.as_deref());
     let device = uuid::Uuid::new_v4().to_string();
-    let token_req = state.client.post("https://gql.twitch.tv/gql")
+    let token_req = state.client.post("https://gql.kick.com/gql")
       .header("Client-Id", &state.client_id)
       .header(header::USER_AGENT, &state.user_agent)
-      .header(header::REFERER, "https://m.twitch.tv/")
-      .header(header::ORIGIN, "https://m.twitch.tv/")
+      .header(header::REFERER, "https://m.kick.com/")
+      .header(header::ORIGIN, "https://m.kick.com/")
       .header("Device-Id", &device)
       .json(&json!({"query":"query StreamPlayer_Query($login: String!, $playerType: String!, $platform: String!, $skipPlayToken: Boolean!) { user(login: $login) { stream @skip(if: $skipPlayToken) { playbackAccessToken(params: {platform: $platform, playerType: $playerType}) { signature value } } } }","variables":{"login":username.to_lowercase(),"playerType":"pulsar","platform":"mobile_web","skipPlayToken":false}}))
       .send().await;
@@ -858,17 +858,17 @@ async fn fetch_raw_text(state: &AppState, url: &str, mobile: bool) -> Result<Str
         .header(
             header::REFERER,
             if mobile {
-                "https://m.twitch.tv"
+                "https://m.kick.com"
             } else {
-                "https://player.twitch.tv"
+                "https://player.kick.com"
             },
         )
         .header(
             header::ORIGIN,
             if mobile {
-                "https://m.twitch.tv"
+                "https://m.kick.com"
             } else {
-                "https://player.twitch.tv"
+                "https://player.kick.com"
             },
         )
         .header("Client-ID", &state.client_id)
@@ -904,8 +904,8 @@ async fn urlproxy(State(state): State<Arc<AppState>>, Query(q): Query<UrlQ>) -> 
     pipe_url(
         &state,
         &url,
-        "https://player.twitch.tv",
-        "https://player.twitch.tv",
+        "https://player.kick.com",
+        "https://player.kick.com",
     )
     .await
 }
@@ -923,8 +923,8 @@ async fn clip_proxy(
     pipe_url(
         &state,
         &url,
-        "https://player.twitch.tv",
-        "https://player.twitch.tv",
+        "https://player.kick.com",
+        "https://player.kick.com",
     )
     .await
 }
@@ -939,8 +939,8 @@ async fn proxy(State(state): State<Arc<AppState>>, Query(q): Query<UrlQ>) -> imp
     pipe_url(
         &state,
         &decoded,
-        "https://www.twitch.tv",
-        "https://www.twitch.tv",
+        "https://www.kick.com",
+        "https://www.kick.com",
     )
     .await
 }
@@ -1024,7 +1024,7 @@ async fn clip_page_or_index(
 }
 
 fn render_clip_invalid(version: &str) -> String {
-    format!("<!doctype html><html><head><title>Twinr - Clip</title><link rel=\"stylesheet\" href=\"/styles.min.css\"></head><body><div class=\"container\"><h1>Not found</h1><p>Clip not found.</p></div><footer><p>Twinr Version {version}</p></footer></body></html>")
+    format!("<!doctype html><html><head><title>Kinr - Clip</title><link rel=\"stylesheet\" href=\"/styles.min.css\"></head><body><div class=\"container\"><h1>Not found</h1><p>Clip not found.</p></div><footer><p>Kinr Version {version}</p></footer></body></html>")
 }
 
 fn render_clip_page(
@@ -1060,5 +1060,5 @@ fn render_clip_page(
         .unwrap_or("");
     let video_tags = state.base_url.as_ref().map(|base| format!("<meta name=\"twitter:card\" content=\"player\" /><meta property=\"og:video\" content=\"{base}{src}\" />")).unwrap_or_default();
 
-    format!("<!doctype html><html><head><meta charset=\"UTF-8\" /><title>Twinr - Clip {title}</title>{video_tags}<link rel=\"stylesheet\" href=\"/styles.min.css\"><link rel=\"stylesheet\" href=\"/poppins.css\"></head><body><div class=\"container\"><video controls src=\"{src}\"></video><span id=\"date\"></span><h3>{title}</h3><div>{game}</div><div><span>By {author}</span> <span>{views} views</span></div><div><a href=\"/{username}?home=true\"><img class=\"w-8 rounded-full\" src=\"/api/urlproxy?url={avatar}\" /></a><a href=\"/{username}?home=true\">{username}</a></div></div><script>const date=Date.parse('{date}')-Date.now(),sec=Math.abs(Math.floor(date/1000)),min=Math.abs(Math.floor(sec/60)),hours=Math.abs(Math.floor(min/60)),days=Math.abs(Math.floor(hours/24));document.getElementById('date').innerText=`${{days}} days, ${{hours%24}} hours, ${{min%60}} minutes, and ${{sec%60}} seconds ago`;</script><footer><p>Twinr Version {} - <a href=\"https://github.com/Gevroska/twinr\">Source</a></p></footer></body></html>", state.version)
+    format!("<!doctype html><html><head><meta charset=\"UTF-8\" /><title>Kinr - Clip {title}</title>{video_tags}<link rel=\"stylesheet\" href=\"/styles.min.css\"><link rel=\"stylesheet\" href=\"/poppins.css\"></head><body><div class=\"container\"><video controls src=\"{src}\"></video><span id=\"date\"></span><h3>{title}</h3><div>{game}</div><div><span>By {author}</span> <span>{views} views</span></div><div><a href=\"/{username}?home=true\"><img class=\"w-8 rounded-full\" src=\"/api/urlproxy?url={avatar}\" /></a><a href=\"/{username}?home=true\">{username}</a></div></div><script>const date=Date.parse('{date}')-Date.now(),sec=Math.abs(Math.floor(date/1000)),min=Math.abs(Math.floor(sec/60)),hours=Math.abs(Math.floor(min/60)),days=Math.abs(Math.floor(hours/24));document.getElementById('date').innerText=`${{days}} days, ${{hours%24}} hours, ${{min%60}} minutes, and ${{sec%60}} seconds ago`;</script><footer><p>Kinr Version {} - <a href=\"https://github.com/Gevroska/kinr\">Source</a></p></footer></body></html>", state.version)
 }

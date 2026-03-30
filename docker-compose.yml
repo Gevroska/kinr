@@ -1,6 +1,6 @@
 services:
-  twinr:
-    image: ghcr.io/gevroska/twinr:latest
+  kinr:
+    image: ghcr.io/gevroska/kinr:latest
     ports:
       - "3000:3000"
     environment:

@@ -1,0 +1,9 @@
+services:
+  twinr:
+    image: ghcr.io/gevroska/twinr:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - CLIENTID=kimne78kx3ncx6brgo4mv6wki5h1ko
+      - USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0
+    restart: unless-stopped

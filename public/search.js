@@ -1,7 +1,8 @@
-const clipRegex = /(.+)?kick\.tv\/\w+\/clip\/[\w-]+/,
-    streamRegex = /(.+)?kick\.tv\/(.+)/,
-    vodRegex = /(.+)?kick\.tv\/videos\/(\d+)/,
-    kickDomainRegex = /(.+)?kick\.tv/;
+const kickHostRegex = /(^|\.)kick\.com$/i,
+    clipRegex = /(.+)?kick\.(?:com|tv)\/\w+\/clip\/[\w-]+/i,
+    streamRegex = /(.+)?kick\.(?:com|tv)\/(.+)/i,
+    vodRegex = /(.+)?kick\.(?:com|tv)\/videos\/(\d+)/i,
+    kickDomainRegex = /(.+)?kick\.(?:com|tv)/i;
 
 function resolvePathFromInput(input) {
     const trimmed = input.trim();
@@ -15,6 +16,9 @@ function resolvePathFromInput(input) {
                 ? trimmed
                 : `https://${trimmed}`;
             const parsed = new URL(formatted);
+
+            if (!kickHostRegex.test(parsed.hostname)) return null;
+
             const normalizedPath = parsed.pathname.replace(/\/+$/, '');
 
             const vodMatch = normalizedPath.match(/^\/videos\/(\d+)$/i);

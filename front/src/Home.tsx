@@ -3,9 +3,10 @@ import Nav from "./components/nav";
 import { useNavigate } from "@solidjs/router";
 import axios from "axios";
 
-const clipRegex = /(.+)?kick\.tv\/\w+\/clip\/[\w-]+/,
-  streamRegex = /(.+)?kick\.tv\/(.+)/,
-  vodRegex = /(.+)?kick\.tv\/videos\/(\d+)/;
+const kickHostRegex = /(^|\.)kick\.com$/i,
+  clipRegex = /(.+)?kick\.(?:com|tv)\/\w+\/clip\/[\w-]+/i,
+  streamRegex = /(.+)?kick\.(?:com|tv)\/(.+)/i,
+  vodRegex = /(.+)?kick\.(?:com|tv)\/videos\/(\d+)/i;
 
 const Home: Component = () => {
   const [inputVal, setInputVal] = createSignal(""),
@@ -57,6 +58,10 @@ const Home: Component = () => {
     try {
       targetUrl = new URL(formattedInput);
     } catch {
+      return null;
+    }
+
+    if (!kickHostRegex.test(targetUrl.hostname)) {
       return null;
     }
 

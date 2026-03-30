@@ -8,7 +8,7 @@
 
 body {
     @apply bg-base-200 text-base-content;
-    background-image: radial-gradient(circle at top, rgba(168, 85, 247, 0.12), transparent 45%);
+    background-image: radial-gradient(circle at top, rgba(83, 252, 24, 0.2), transparent 45%);
     min-height: 100vh;
 }
 

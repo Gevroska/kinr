@@ -73,6 +73,9 @@ async fn main() {
         .route("/api/urlproxy", get(urlproxy))
         .route("/api/proxy", get(proxy))
         .route("/videos/:id", get(index_file))
+        .route("/:username/videos/:id", get(vod_page_or_index))
+        .route("/video/:id", get(vod_page_or_index))
+        .route("/:username/clips/:id", get(clip_page_or_index))
         .route("/:username/clip/:id", get(clip_page_or_index))
         .route("/:username", get(index_file))
         .fallback_service(ServeDir::new("public"))
@@ -826,7 +829,9 @@ fn select_playlist(manifest: &str, quality: &QualityPreference) -> Option<String
                 }
             }
         }
-        QualityPreference::Auto | QualityPreference::AudioOnly | QualityPreference::AudioOpus(_) => {}
+        QualityPreference::Auto
+        | QualityPreference::AudioOnly
+        | QualityPreference::AudioOpus(_) => {}
     }
 
     lines
@@ -936,13 +941,7 @@ async fn proxy(State(state): State<Arc<AppState>>, Query(q): Query<UrlQ>) -> imp
     let normalized = encoded.replace(' ', "+");
     let decoded_bytes = STANDARD.decode(normalized.as_bytes()).unwrap_or_default();
     let decoded = String::from_utf8(decoded_bytes).unwrap_or_default();
-    pipe_url(
-        &state,
-        &decoded,
-        "https://kick.com",
-        "https://kick.com",
-    )
-    .await
+    pipe_url(&state, &decoded, "https://kick.com", "https://kick.com").await
 }
 
 async fn pipe_url(state: &AppState, url: &str, referer: &str, origin: &str) -> Response {
@@ -1021,6 +1020,10 @@ async fn clip_page_or_index(
         &metadata,
     ))
     .into_response()
+}
+
+async fn vod_page_or_index() -> impl IntoResponse {
+    index_file().await.into_response()
 }
 
 fn render_clip_invalid(version: &str) -> String {

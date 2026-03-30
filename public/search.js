@@ -1,8 +1,6 @@
 const kickHostRegex = /(^|\.)kick\.com$/i,
-    clipRegex = /(.+)?kick\.(?:com|tv)\/\w+\/clip\/[\w-]+/i,
-    streamRegex = /(.+)?kick\.(?:com|tv)\/(.+)/i,
-    vodRegex = /(.+)?kick\.(?:com|tv)\/videos\/(\d+)/i,
-    kickDomainRegex = /(.+)?kick\.(?:com|tv)/i;
+    vodIdRegex = /^([\da-f]{8}-(?:[\da-f]{4}-){3}[\da-f]{12}|\d+)$/i,
+    clipIdRegex = /^clip_[\w-]+$/i;
 
 function resolvePathFromInput(input) {
     const trimmed = input.trim();
@@ -20,14 +18,26 @@ function resolvePathFromInput(input) {
             if (!kickHostRegex.test(parsed.hostname)) return null;
 
             const normalizedPath = parsed.pathname.replace(/\/+$/, '');
+            const queryClip = parsed.searchParams.get('clip');
 
-            const vodMatch = normalizedPath.match(/^\/videos\/(\d+)$/i);
+            if (queryClip && clipIdRegex.test(queryClip)) {
+                const clipQueryChannel = normalizedPath
+                    .replace(/^\/+/, '')
+                    .split('/')[0];
+                if (clipQueryChannel) {
+                    return `/${clipQueryChannel}/clips/${queryClip}`;
+                }
+            }
+
+            const vodMatch = normalizedPath.match(
+                /^\/(?:video|videos|[^/]+\/videos)\/([\w-]+)$/i
+            );
             if (vodMatch) return `/videos/${vodMatch[1]}`;
 
             const clipMatch = normalizedPath.match(
-                /^\/([^/]+)\/clip\/([\w-]+)$/i
+                /^\/([^/]+)\/clips\/(clip_[\w-]+)$/i
             );
-            if (clipMatch) return `/${clipMatch[1]}/clip/${clipMatch[2]}`;
+            if (clipMatch) return `/${clipMatch[1]}/clips/${clipMatch[2]}`;
 
             const streamerMatch = normalizedPath.match(/^\/([^/]+)$/);
             if (streamerMatch) return `/${streamerMatch[1]}`;
@@ -36,17 +46,11 @@ function resolvePathFromInput(input) {
         }
     }
 
-    if (
-        trimmed.match(clipRegex) ||
-        trimmed.match(streamRegex) ||
-        trimmed.match(vodRegex)
-    ) {
-        return trimmed.replace(kickDomainRegex, '');
-    }
-
-    if (!Number.isNaN(Number(trimmed))) {
+    if (vodIdRegex.test(trimmed)) {
         return `/videos/${trimmed}`;
     }
+
+    if (clipIdRegex.test(trimmed)) return null;
 
     return `/${trimmed.replace(/^\/+/, '')}`;
 }

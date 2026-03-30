@@ -82,7 +82,7 @@ async function fetchClips(filter, limit) {
 
         img.src = `/stream/urlproxy?url=${clip.thumbnailURL}`;
 
-        link.href = `/${window.username}/clip/${clip.slug}`;
+        link.href = `/${window.username}/clips/${clip.slug}`;
 
         bodyDiv.appendChild(title);
         bodyDiv.appendChild(date);
